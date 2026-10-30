@@ -1,0 +1,107 @@
+@layer mantine, base;
+
+@layer base {
+  /*
+   * Theme v2 tokens. Declared on :root explicitly (rather than through the
+   * light-dark() mixin) because Mantine stamps data-mantine-color-scheme onto
+   * the root element itself, so a nested selector would never match.
+   */
+  :root {
+    /* Page ground — warm paper. Surfaces stay white on top of it. */
+    --app-ground: var(--mantine-color-gray-0);
+
+    /* The identity band: deep bound-cloth green with cream text. */
+    --app-header-bg: #22342c;
+    --app-header-fg: #f3ede0;
+    --app-header-fg-dimmed: #b7c3ba;
+    --app-header-border: #16241d;
+    --app-header-hover: rgba(255, 255, 255, 0.1);
+    --app-header-outline: rgba(255, 255, 255, 0.2);
+
+    /* Navigation rail: a tinted strip, one step off the paper. */
+    --app-nav-bg: var(--mantine-color-gray-1);
+
+    /* Recessed panel inside a surface (a review reply, a quoted block). */
+    --app-inset: var(--mantine-color-gray-1);
+
+    /* Amber that stays legible on the surface behind it. */
+    --app-star: var(--mantine-color-amber-7);
+    --app-star-empty: var(--mantine-color-gray-4);
+    --app-accent-line: var(--mantine-color-amber-6);
+
+    /* Reader chrome — the page canvas itself always stays white. */
+    --app-reader-bg: var(--mantine-color-gray-2);
+
+    --app-card-hover-border: var(--mantine-color-gray-4);
+  }
+
+  [data-mantine-color-scheme='dark'] {
+    --app-ground: var(--mantine-color-dark-9);
+
+    --app-header-bg: #1d2a24;
+    --app-header-fg: #e6ece6;
+    --app-header-fg-dimmed: #9fb0a5;
+    --app-header-border: #131c17;
+    --app-header-hover: rgba(255, 255, 255, 0.08);
+    --app-header-outline: rgba(255, 255, 255, 0.16);
+
+    --app-nav-bg: #1a201c;
+
+    --app-inset: var(--mantine-color-dark-6);
+
+    --app-star: var(--mantine-color-amber-4);
+    --app-star-empty: var(--mantine-color-dark-3);
+    --app-accent-line: var(--mantine-color-amber-4);
+
+    --app-reader-bg: var(--mantine-color-dark-8);
+
+    --app-card-hover-border: var(--mantine-color-dark-3);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--app-ground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  /*
+   * Serif display sizing: Source Serif 4 runs a little small at the same pixel
+   * size as Inter, and its lowercase needs slightly tighter tracking at
+   * heading sizes to stop looking loose next to dense tables.
+   */
+  :where(h1, h2, h3) {
+    letter-spacing: -0.01em;
+  }
+
+  /* Tables stay dense; only the hover tint changes with the scheme. */
+  :where(.mantine-Table-tr) {
+    transition: background-color 100ms ease;
+  }
+
+  /*
+   * Cards firm up on hover instead of moving. The landing page's portal cards
+   * override this with an amber edge and a lift — they are the only cards that
+   * are a navigation target in themselves.
+   */
+  :where(.mantine-Card-root) {
+    transition:
+      border-color 120ms ease,
+      box-shadow 120ms ease;
+  }
+
+  :where(.mantine-Card-root):hover {
+    border-color: var(--app-card-hover-border);
+    box-shadow: var(--mantine-shadow-sm);
+  }
+}

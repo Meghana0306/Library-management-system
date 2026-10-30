@@ -1,0 +1,31 @@
+# Environment / secrets — never commit
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# IDE files
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# macOS/cloud-sync duplicates
+* 2.*
+*.iml
+
+# Dependencies
+node_modules/
+
+# Build artifacts
+backend/target/
+frontend/dist/
+frontend/dist-*/
+frontend/.vite/
+frontend/coverage/
+
+# Logs
+*.log

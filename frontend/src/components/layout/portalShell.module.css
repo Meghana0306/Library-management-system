@@ -1,0 +1,99 @@
+/*
+ * The header band is the product's identity anchor: a deep bound-cloth green
+ * that runs full width in both schemes (lifted a step in dark so it still
+ * reads as a surface rather than a hole). Everything inside it opts out of the
+ * scheme-aware palette and uses the --app-header-* tokens instead.
+ */
+.header {
+  background-color: var(--app-header-bg);
+  border-bottom: 1px solid var(--app-header-border);
+  color: var(--app-header-fg);
+}
+
+.wordmark {
+  font-family: var(--mantine-font-family-headings);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--app-header-fg);
+  white-space: nowrap;
+}
+
+.portalName {
+  color: var(--app-header-fg-dimmed);
+  white-space: nowrap;
+}
+
+.divider {
+  --divider-color: var(--app-header-outline);
+}
+
+.mark {
+  color: var(--mantine-color-amber-4);
+  display: flex;
+}
+
+/*
+ * Header controls: quiet cream outlines on the green band rather than the
+ * default white chip. Mantine sets --button-bg / --ai-bg inline from the
+ * variant, so these override the painted properties instead — this file is
+ * unlayered and therefore beats everything in @layer mantine.
+ */
+.actions :global(.mantine-ActionIcon-root),
+.actions :global(.mantine-Button-root) {
+  background: transparent;
+  color: var(--app-header-fg);
+  border: 1px solid var(--app-header-outline);
+}
+
+.actions :global(.mantine-ActionIcon-root:hover),
+.actions :global(.mantine-Button-root:hover) {
+  background: var(--app-header-hover);
+  color: var(--app-header-fg);
+}
+
+/* A forest focus ring would vanish against the band; amber does not. */
+.header :global(*:focus-visible) {
+  outline: 2px solid var(--mantine-color-amber-4);
+  outline-offset: 2px;
+}
+
+.account {
+  border-radius: var(--mantine-radius-md);
+  padding: 4px 8px;
+  color: var(--app-header-fg);
+  transition: background-color 100ms ease;
+}
+
+.account:hover {
+  background-color: var(--app-header-hover);
+}
+
+.accountName {
+  color: var(--app-header-fg);
+}
+
+.burger {
+  --burger-color: var(--app-header-fg);
+}
+
+/* Navigation rail sits one tint off the paper so the content column reads as
+ * the page and the rail as chrome. */
+.navbar {
+  background-color: var(--app-nav-bg);
+}
+
+.navLink {
+  border-radius: var(--mantine-radius-md);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.navLink[data-active] {
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--app-accent-line);
+}
+
+.main {
+  background-color: var(--app-ground);
+}

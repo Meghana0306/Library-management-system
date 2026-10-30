@@ -1,0 +1,132 @@
+/*
+ * Reader-only styles, loaded by PDFReaderModal.
+ *
+ * The PDF page canvas itself is left alone in both schemes — it is paper, and
+ * inverting it would misrepresent the document. Only the surround, the
+ * selection tip and the highlight popup follow the colour scheme, via the
+ * Mantine tokens so they stay in step with the rest of the product.
+ */
+
+/* PDF viewer container – replaces the old iframe */
+.pdf-viewer-container {
+  width: 100%;
+  height: 600px;
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-md);
+  background-color: var(--app-reader-bg);
+  overflow: hidden;
+  position: relative;
+}
+
+/* react-pdf-highlighter fills the container */
+.pdf-viewer-container .PdfHighlighter {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+}
+
+.pdf-viewer-container .loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--mantine-color-dimmed);
+  font-size: 16px;
+}
+
+.pdf-viewer-container .error-message {
+  background-color: var(--mantine-color-red-light);
+  border-left: 4px solid var(--mantine-color-red-filled);
+  color: var(--mantine-color-red-light-color);
+  padding: 12px 15px;
+  border-radius: var(--mantine-radius-sm);
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+/* Tip popup shown on text selection */
+.pdf-selection-tip {
+  background: var(--mantine-color-body);
+  color: var(--mantine-color-text);
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-md);
+  box-shadow: var(--mantine-shadow-lg);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 220px;
+  z-index: 10;
+}
+
+.pdf-selection-tip input {
+  background: var(--mantine-color-default);
+  color: var(--mantine-color-text);
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-sm);
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pdf-selection-tip input:focus-visible {
+  outline: 2px solid var(--mantine-primary-color-filled);
+  outline-offset: 1px;
+}
+
+.pdf-selection-tip-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.pdf-selection-tip-actions button {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: var(--mantine-radius-sm);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pdf-selection-tip-actions button:first-child {
+  background: var(--mantine-primary-color-filled);
+  color: var(--mantine-primary-color-contrast);
+}
+
+.pdf-selection-tip-actions button:first-child:hover {
+  background: var(--mantine-primary-color-filled-hover);
+}
+
+.pdf-selection-tip-actions button.cancel {
+  background: var(--mantine-color-default);
+  color: var(--mantine-color-text);
+  border: 1px solid var(--mantine-color-default-border);
+}
+
+.pdf-selection-tip-actions button.cancel:hover {
+  background: var(--mantine-color-default-hover);
+}
+
+/* Popup shown on hover over an existing highlight */
+.pdf-highlight-popup {
+  background: var(--mantine-color-dark-8);
+  color: var(--mantine-color-gray-0);
+  border-radius: var(--mantine-radius-sm);
+  padding: 6px 10px;
+  font-size: 13px;
+  max-width: 240px;
+  word-break: break-word;
+}
+
+[data-mantine-color-scheme='dark'] .pdf-highlight-popup {
+  background: var(--mantine-color-dark-5);
+  border: 1px solid var(--mantine-color-dark-4);
+}
+
+@media (max-width: 768px) {
+  .pdf-viewer-container {
+    height: 400px;
+  }
+}

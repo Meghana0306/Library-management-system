@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+          cache-dependency-path: backend/pom.xml
+
+      # backend/pom.xml pins the Testcontainers Docker API version to 1.44
+      # (needed locally for Docker Desktop 29.x, which rejects the default
+      # docker-java-pinned 1.32). 1.44 is also valid against the Docker
+      # daemon preinstalled on ubuntu-latest runners, so this does not need
+      # to be overridden for CI.
+      - name: Run backend tests (unit + integration)
+        run: cd backend && mvn -B verify
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: cd frontend && npm ci
+
+      - name: Lint
+        run: cd frontend && npm run lint
+
+      - name: Test
+        run: cd frontend && npm test -- --run
+
+      - name: Build
+        run: cd frontend && npm run build
